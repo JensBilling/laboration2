@@ -4,37 +4,27 @@ public class Calculator {
 
     int add(String numbers) {
 
-        int num1 = 0;
-        int num2 = 0;
-
         if (numbers.equals("")) {
             return 0;
-
-        } else if (!numbers.contains(",")) {
-
-            // Catches NumberFormatException if you try to
-            // add any symbols other than numbers, and returns 0 instead of crashing.
-            try {
-                return Integer.parseInt(numbers);
-            } catch (NumberFormatException e) {
-                return 0;
-            }
-
-        } else if (numbers.contains(",")) {
-
+        } else {
             String[] splitNumbers = numbers.split(",");
 
-            // Catches NumberFormatException if you try to
-            // add any symbols other than numbers, and returns 0 instead of crashing.
+            // Catches NumberFormatException if you try to add any symbols
+            // other than numbers, and returns 0 instead of crashing.
             try {
-                num1 = Integer.parseInt(splitNumbers[0]);
-                num2 = Integer.parseInt(splitNumbers[1]);
+                int returnValue = 0;
+                for (int i = 0; i < splitNumbers.length; i++) {
+                    splitNumbers[i] = splitNumbers[i].trim();
+                    int tempLoopInt = Integer.parseInt(splitNumbers[i]);
+                    returnValue += tempLoopInt;
+                }
+
+                return returnValue;
             } catch (NumberFormatException e) {
+                System.out.println("Enter only numbers separated by commas(,)");
                 return 0;
             }
-
         }
-
-        return num1 + num2;
     }
+
 }
