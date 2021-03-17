@@ -10,8 +10,8 @@ class CalculatorTest {
     void multiNumberAddTest() {
         Calculator calculator = new Calculator();
 
-        var sum = calculator.add("5,3,7,2,10");
-        assertEquals(27, sum);
+        var sum = calculator.add("1\n2,3");
+        assertEquals(6, sum);
     }
 
     @Test

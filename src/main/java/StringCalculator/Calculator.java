@@ -7,7 +7,10 @@ public class Calculator {
         if (numbers.equals("")) {
             return 0;
         } else {
+            numbers = numbers.replace('\n', ',');
+
             String[] splitNumbers = numbers.split(",");
+
 
             // Catches NumberFormatException if you try to add any symbols
             // other than numbers, and returns 0 instead of crashing.
