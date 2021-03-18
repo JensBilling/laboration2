@@ -28,6 +28,15 @@ class CalculatorTest {
 
         int sum = calculator.add("");
         assertEquals(0, sum);
+
     }
 
+    @Test
+    void additionalDelimiterAddTest() {
+        Calculator calculator = new Calculator();
+
+        var sum = calculator.add("//;\n1;2");
+
+        assertEquals(3, sum);
+    }
 }
