@@ -1,5 +1,7 @@
 package StringCalculator;
 
+import java.util.ArrayList;
+
 public class Calculator {
 
     int add(String numbers) {
@@ -16,6 +18,18 @@ public class Calculator {
             }
 
             String[] splitNumbers = numbers.split(",");
+
+            boolean negativeCheck = false;
+            ArrayList<String> negativeNumbers = new ArrayList<>();
+            for (String element : splitNumbers) {
+                if (element.contains("-")){
+                    negativeCheck = true;
+                    negativeNumbers.add(element);
+                }
+            }
+
+            if (negativeCheck)
+                throw new RuntimeException("Negatives not allowed" + negativeNumbers);
 
 
             // Catches NumberFormatException if you try to add any symbols
