@@ -9,13 +9,14 @@ public class Calculator {
         if (numbers.equals("")) {
             return 0;
         } else {
-            numbers = numbers.replace('\n', ',');
             String additionalDelimiter;
             if (numbers.startsWith("//")) {
-                additionalDelimiter = numbers.substring(2, 3);
+                int additionalDelimiterEndpoint = numbers.indexOf("\n");
+                additionalDelimiter = numbers.substring(2, additionalDelimiterEndpoint);
                 numbers = numbers.replace("//" + additionalDelimiter, "");
                 numbers = numbers.replace(additionalDelimiter, ",");
             }
+            numbers = numbers.replace('\n', ',');
 
 
             // Splits numbers of String into individual array elements
@@ -39,27 +40,22 @@ public class Calculator {
                     negativeNumbers.add(element);
                 }
             }
-            if (numbers.contains("-"))
+            if (negativeNumbers.size() > 0) {
                 throw new RuntimeException("Negatives not allowed" + negativeNumbers);
+            }
 
 
-            // Catches NumberFormatException if you try to add any symbols
-            // other than numbers or delimiters, and returns 0 instead of crashing.
-            try {
-                int returnValue = 0;
-                for (Integer integerNumber : integerNumbers) {
-                    if (integerNumber <= 1000) {
-                        returnValue += integerNumber;
-                    }
-
+            // Adds all numbers together
+            int returnValue = 0;
+            for (Integer integerNumber : integerNumbers) {
+                if (integerNumber <= 1000) {
+                    returnValue += integerNumber;
                 }
 
-                return returnValue;
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR. Invalid input, returning 0");
-                return 0;
             }
+
+            return returnValue;
         }
     }
-
 }
+

@@ -35,8 +35,9 @@ class CalculatorTest {
     void additionalDelimiterAddTest() {
         Calculator calculator = new Calculator();
 
-        var sum = calculator.add("//;1;1000;;;\n,5\n1001");
+        var sum = calculator.add("//test\n1,2\n3test4");
 
-        assertEquals(1006, sum);
+
+        assertEquals(10, sum);
     }
 }
