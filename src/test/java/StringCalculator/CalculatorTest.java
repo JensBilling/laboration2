@@ -35,9 +35,18 @@ class CalculatorTest {
     void additionalDelimiterAddTest() {
         Calculator calculator = new Calculator();
 
-        var sum = calculator.add("//test\n1,2\n3test4");
+        var sum = calculator.add("//*\n1,2\n3*4");
 
 
         assertEquals(10, sum);
+    }
+
+    @Test
+    void additionalMultiDelimiterAddTest() {
+        Calculator calculator = new Calculator();
+
+        var sum = calculator.add("//[*][;][DELIMITER][\n1,2\n3*4;5DELIMITER6");
+
+        assertEquals(21, sum);
     }
 }
