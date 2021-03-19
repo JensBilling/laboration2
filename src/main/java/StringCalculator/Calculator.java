@@ -17,18 +17,29 @@ public class Calculator {
                 numbers = numbers.replace(additionalDelimiter, ",");
             }
 
+
+            // Splits numbers of String into individual array elements
             String[] splitNumbers = numbers.split(",");
 
-            boolean negativeCheck = false;
-            ArrayList<String> negativeNumbers = new ArrayList<>();
+
+            // Convert String elements of splitNumbers into Integer elements in an arraylist and removes empty elements
+            ArrayList<Integer> integerNumbers = new ArrayList<>();
             for (String element : splitNumbers) {
-                if (element.contains("-")){
-                    negativeCheck = true;
-                    negativeNumbers.add(element);
+                if (!element.equals("")) {
+                    element = element.trim();
+                    integerNumbers.add(Integer.parseInt(element));
                 }
             }
 
-            if (negativeCheck)
+
+            // Checks for negative numbers and throws exception if found
+            ArrayList<Integer> negativeNumbers = new ArrayList<>();
+            for (Integer element : integerNumbers) {
+                if (element < 0) {
+                    negativeNumbers.add(element);
+                }
+            }
+            if (numbers.contains("-"))
                 throw new RuntimeException("Negatives not allowed" + negativeNumbers);
 
 
@@ -36,12 +47,11 @@ public class Calculator {
             // other than numbers or delimiters, and returns 0 instead of crashing.
             try {
                 int returnValue = 0;
-                for (int i = 0; i < splitNumbers.length; i++) {
-                    if (!splitNumbers[i].equals("")) {
-                        splitNumbers[i] = splitNumbers[i].trim();
-                        int tempLoopInt = Integer.parseInt(splitNumbers[i]);
-                        returnValue += tempLoopInt;
+                for (Integer integerNumber : integerNumbers) {
+                    if (integerNumber <= 1000) {
+                        returnValue += integerNumber;
                     }
+
                 }
 
                 return returnValue;
