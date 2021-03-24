@@ -1,6 +1,7 @@
 package StringCalculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,6 +12,7 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
 
         var sum = calculator.add("1\n2,3");
+
         assertEquals(6, sum);
     }
 
@@ -37,7 +39,6 @@ class CalculatorTest {
 
         var sum = calculator.add("//*\n1,2\n3*4");
 
-
         assertEquals(10, sum);
     }
 
@@ -48,5 +49,13 @@ class CalculatorTest {
         var sum = calculator.add("//[*][;][DELIMITER][\n1,2\n3*4;5DELIMITER6");
 
         assertEquals(21, sum);
+    }
+
+    @Test
+    void throwsExceptionTest() {
+        Calculator calculator = new Calculator();
+
+        assertThrows(RuntimeException.class, () -> calculator.add("1,2,3,-4"));
+
     }
 }
