@@ -40,6 +40,22 @@ class EmployeeManagerTest {
 
     }
 
+    @Test
+    void runtimeExceptionTest() {
+
+        EmployeeRepository employeeRepository = mock(EmployeeRepository.class);
+        Employee testEmployee = new Employee("4", 7000);
+        when(employeeRepository.findAll()).thenReturn(List.of(testEmployee,
+                new Employee("1", 5000),
+                new Employee("2", 6000),
+                new Employee("3", 3000)));
+        BankService bankService = mock(BankService.class);
+        doThrow(new RuntimeException()).when(bankService).pay("3", 3000);
+        EmployeeManager emp = new EmployeeManager(employeeRepository, bankService);
+        emp.payEmployees();
+
+        assertTrue(testEmployee.isPaid());
+    }
 
     @Test
     void employeePaidCatchesException() {
